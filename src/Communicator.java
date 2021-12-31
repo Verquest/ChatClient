@@ -38,6 +38,7 @@ public class Communicator implements Runnable{
                     break;
                 } catch (SocketException e) {
                     chatPane.setText("Server offline [" + counter++ + "]");
+                    e.printStackTrace();
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException interruptedException) {
@@ -47,6 +48,13 @@ public class Communicator implements Runnable{
             }
         }catch (IOException e){
             chatPane.setText("Error reconnecting.");
+        }
+    }
+    public void closeSocket(){
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     @Override

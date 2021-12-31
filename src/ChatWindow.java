@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.security.Key;
 
 public class ChatWindow extends JFrame {
@@ -19,7 +17,13 @@ public class ChatWindow extends JFrame {
     private int stage = 0;
     ChatWindow(String title){
         super(title);
-
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                communicator.closeSocket();
+            }
+        });
         this.setSize(500, 800);
         this.setLayout(new GridBagLayout());
         input.setFont(mainFont);
