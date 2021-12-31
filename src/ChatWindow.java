@@ -18,12 +18,6 @@ public class ChatWindow extends JFrame {
     ChatWindow(String title){
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                communicator.closeSocket();
-            }
-        });
         this.setSize(500, 800);
         this.setLayout(new GridBagLayout());
         input.setFont(mainFont);
@@ -59,6 +53,12 @@ public class ChatWindow extends JFrame {
             }
         });
         setup();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                communicator.closeSocket();
+            }
+        });
         send.addActionListener(action -> send());
     }
     private void setup(){
